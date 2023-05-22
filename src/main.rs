@@ -8,12 +8,33 @@ use std::io::{BufReader, ErrorKind, Write};
 use std::ops::Add;
 use std::{array, io};
 
-//This is a trait, we'll look into this further on
-fn get_sum_gen<T: Add<Output = T>>(x: T, y: T) -> T {
-    return x + y;
+fn print_string(x: String) {
+    println!("A string: {}", x)
+}
+
+fn print_return_string(x: String) -> String {
+    println!("Another string: {}", x);
+    return x;
+}
+
+fn change_string(name: &mut String) {
+    name.push_str(" is happy");
+    println!("Message: {}", name)
 }
 
 fn main() {
-    println!("5 + 4 = {}", get_sum_gen(5, 4));
-    println!("5.2 + 4.6 = {}", get_sum_gen(5.2, 4.6))
+    let str1 = String::from("World");
+
+    // // let str2 = str1;
+    // // By doing this, the value of str1 is passed to str2. And now, str1 no longer exists
+    // //println!("Hello {}!", str1) // Error
+
+    let str2 = str1.clone();
+    println!("Hello {}!", str1); // Works fine
+
+    let str3 = print_return_string(str1);
+    println!("str3 = {}", str3);
+
+    let mut str4 = String::from("Derek");
+    change_string(&mut str4)
 }

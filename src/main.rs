@@ -7,33 +7,35 @@ use std::io;
 use std::io::{BufReader, ErrorKind, Write};
 
 fn main() {
-    let num_1: f32 = 1.111111111111111;
-    println!("f32: {}", num_1 + 0.000000000000000222);
+    let age = 8;
 
-    let num_2: f64 = 1.111111111111111;
-    println!("f64: {}", num_2 + 0.000000000000000222);
+    if (age >= 1) && (age <= 18) {
+        println!("Important birthday");
+    } else if (age == 21) || (age == 50) {
+        println!("Important birthday");
+    } else if age >= 65 {
+        println!("Important birthday");
+    } else {
+        println!("Not an important birthday");
+    }
 
-    /*
-    f32: 1.1111112
-    f64: 1.1111111111111112
-     */
+    let mut my_age = 47;
+    let can_vote = if my_age >= 18 { true } else { false };
+    println!("Can vote?: {}", can_vote);
 
-    let num_3: u32 = 5;
-    let num_4: u32 = 4;
-    println!("{} + {} = {}", num_3, num_4, num_3 + num_4,);
-    println!("{} - {} = {}", num_3, num_4, num_3 - num_4,);
-    println!("{} * {} = {}", num_3, num_4, num_3 * num_4,);
-    println!("{} / {} = {}", num_3, num_4, num_3 / num_4,);
-    println!("{} % {} = {}", num_3, num_4, num_3 % num_4,);
+    let age2 = 8;
+    match age2 {
+        1..=18 => println!("Important birthday"),
+        21 | 50 => println!("Important birthday"),
+        65.. => println!("Important birthday"),
+        _ => println!("Not an important birthday"),
+    };
 
-    /*
-    5 + 4 = 9
-    5 - 4 = 1
-    5 * 4 = 20
-    5 / 4 = 1
-    5 % 4 = 1
-     */
-
-    let random_num = rand::thread_rng().gen_range(1..101); // Doesn't require changing the seed, like C
-    println!("Random: {}", random_num)
+    let my_age = 18;
+    let voting_age = 18;
+    match my_age.cmp(&voting_age) {
+        Ordering::Less => println!("Can't vote"),
+        Ordering::Greater => println!("Can vote"),
+        Ordering::Equal => println!("You gained the right to vote"),
+    };
 }

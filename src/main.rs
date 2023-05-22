@@ -2,45 +2,48 @@
 
 use rand::Rng;
 use std::cmp::Ordering;
+use std::fmt::Display;
 use std::fs::File;
 use std::io::{BufReader, ErrorKind, Write};
 use std::{array, io};
 
 fn main() {
-    let mut st1 = String::new();
+    // Casting
+    let int_u8: u8 = 5;
+    let int2_u8: u8 = 4;
 
-    st1.push('N');
-    st1.push_str(" word");
+    let int3_u32: u32 = (int_u8 as u32) + (int2_u8 as u32);
 
-    for word in st1.split_whitespace() {
-        println!("{}", word);
+    // Enums
+    enum Days {
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday,
+    };
+
+    impl Days {
+        fn is_weekend(&self) -> bool {
+            match self {
+                Days::Saturday | Days::Sunday => true,
+                _ => false,
+            }
+        }
     }
 
-    let st2 = st1.replace("N", "Another");
-    println!("{}", st2);
-
-    let st3 = String::from("x r t b h k k a m c");
-    let mut v1: Vec<char> = st3.chars().collect();
-    v1.sort();
-    v1.dedup();
-    for char in v1 {
-        println!("{}", char)
+    let today: Days = Days::Monday;
+    match today {
+        Days::Monday => println!("Everyone hates monday"),
+        Days::Tuesday => println!("Donut day"),
+        Days::Wednesday => println!("Hump day"),
+        Days::Thursday => println!("Pay day"),
+        Days::Friday => println!("Almost weekend"),
+        Days::Saturday => println!("Weekend!"),
+        Days::Sunday => println!("Weekend!"),
     }
 
-    let st4: &str = "Random string";
-    let mut st5: String = st4.to_string();
-    println!("{}", st5);
-
-    let byte_arr1 = st5.as_bytes();
-    let st6 = &st5[0..6];
-
-    println!("String length: {}", st6.len());
-    st5.clear();
-    let st6 = String::from("Just some");
-    let st7 = String::from(" words");
-    let st8 = st6 + &st7; //st6 is no longer available, it's in st88 now. But st7 does exists beacuse I called it by reference
-
-    for char in st8.bytes() {
-        println!("{}", char)
-    }
+    println!("Is today the weekend?: {}", today.is_weekend());
 }

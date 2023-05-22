@@ -7,27 +7,44 @@ use std::fs::File;
 use std::io::{BufReader, ErrorKind, Write};
 use std::{array, io};
 
+fn say_hello() {
+    println!("Hello world!")
+}
+
+fn get_sum(x: i32, y: i32) {
+    println!("{} + {} = {}", x, y, x + y)
+}
+
+fn get_sum_2(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+fn get_sum_3(x: i32, y: i32) -> i32 {
+    return x + y;
+}
+
+fn get(x: i32) -> (i32, i32) {
+    return (x + 1, x + 2);
+}
+
+fn sum_list(list: &[i32]) -> i32 {
+    let mut sum = 0;
+
+    for &val in list.iter() {
+        sum += &val;
+    }
+
+    return sum;
+}
+
 fn main() {
-    let vec1: Vec<i32> = Vec::new();
-    let mut vec2 = vec![1, 2, 3, 4];
+    say_hello();
+    get_sum(4, 6);
+    println!("{}", get_sum_3(5, 7));
 
-    vec2.push(5);
-    println!("1st: {}", vec2[0]);
+    let (val1, val2) = get(3);
+    println!("Nums: {} {}", val1, val2);
 
-    let second: &i32 = &vec2[1];
-    match vec2.get(1) {
-        Some(second) => println!("2nd: {}", second),
-        None => println!("No second value"),
-    }
-
-    for i in &mut vec2 {
-        *i *= 2
-    }
-
-    for i in &mut vec2 {
-        println!("{}", i)
-    }
-
-    println!("Length: {}", vec2.len());
-    println!("Pop: {:?}", vec2.pop()) // Since it's optional, meaning that there might not be anything there, I hace to use {:?}
+    let num_list = vec![1, 2, 3, 4, 5];
+    println!("Sum of list = {}", sum_list(&num_list))
 }

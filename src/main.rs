@@ -1,16 +1,10 @@
-#![allow(unused)]
-
 use rand::Rng;
 use std::cmp::Ordering;
 use std::fs::File;
 use std::io;
-use std::io::{BufRead, BufReader, ErrorKind, Write};
+use std::io::{BufReader, ErrorKind, Write};
 
 fn main() {
-    println!("Max u32: {}", u32::MAX);
-    println!("Max u64: {}", u64::MAX);
-    println!("Max usize: {}", usize::MAX);
-    println!("Max u128: {}", u128::MAX);
-    println!("Max f32: {}", f32::MAX);
-    println!("Max i64: {}", i64::MAX);
+    let _is_true = true;
+    // Any unused variable will throw error. Unless I type '_' before the name
 }

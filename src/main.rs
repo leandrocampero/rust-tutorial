@@ -10,22 +10,68 @@ use std::ops::Add;
 use std::{array, io};
 
 fn main() {
-    let mut heroes = HashMap::new();
-    heroes.insert("Superman", "Clark Kent");
-    heroes.insert("Batman", "Bruce Wayne");
-    heroes.insert("The Flash", "Barry Allen");
-
-    for (k, v) in heroes.iter() {
-        println!("{} = {}", k, v)
+    const PI: f32 = 3.14159265;
+    struct Customer {
+        name: String,
+        address: String,
+        balance: f32,
     }
 
-    println!("Length: {}", heroes.len());
+    let mut bob = Customer {
+        name: String::from("Bob Smith"),
+        address: String::from("555 main st."),
+        balance: 234.50,
+    };
 
-    if heroes.contains_key(&"Batman") {
-        let the_batman = heroes.get(&"Batman");
-        match the_batman {
-            Some(x) => println!("Batman is a hero"),
-            None => println!("Batman is not a hero"),
+    bob.address = String::from("505 2nd St");
+
+    trait Shape {
+        // Sounds like an Interface in Object Oriented Languages
+        fn new(length: f32, width: f32) -> Self;
+        fn area(&self) -> f32;
+    }
+
+    struct Rectangle {
+        length: f32,
+        width: f32,
+    }
+
+    struct Circle {
+        length: f32,
+        width: f32,
+    }
+
+    impl Shape for Rectangle {
+        fn new(length: f32, width: f32) -> Rectangle {
+            return Rectangle { length, width };
+        }
+        fn area(&self) -> f32 {
+            return self.length * self.width;
         }
     }
+
+    impl Shape for Circle {
+        fn new(length: f32, width: f32) -> Circle {
+            return Circle { length, width };
+        }
+        fn area(&self) -> f32 {
+            return (self.length / 2.0).powf(2.0) * PI;
+        }
+    }
+
+    let rec: Rectangle = Shape::new(10.0, 20.0);
+    let circ: Circle = Shape::new(8.0, 2.0);
+
+    println!(
+        "Rec of {} by {} whose area is {}",
+        rec.length,
+        rec.width,
+        rec.area()
+    );
+    println!(
+        "Circle of {} by {} whose area is {}",
+        circ.length,
+        circ.width,
+        circ.area()
+    )
 }

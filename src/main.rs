@@ -13,32 +13,15 @@ mod restaurant;
 use crate::restaurant::order_food;
 
 fn main() {
-    let mut array = [1, 2, 3, 4];
-
-    for val in array.iter() {
-        // This way the loop is "borrowing the values from the array. Can't manipulate it"
-        println!("{}", val)
+    fn use_func<T>(a: i32, b: i32, func: T) -> i32
+    where
+        T: Fn(i32, i32) -> i32,
+    {
+        func(a, b)
     }
 
-    let mut iter1 = array.iter();
-
-    println!("1st: {:?}", iter1.next());
-
-    let can_vote = |age: i32| -> bool { age >= 18 };
-    // It's la Javascript's Arrow Functions or Java's Lambda Functions
-
-    println!("Can vote?: {}", can_vote(9));
-
-    let mut samp1 = 5;
-    let print_var = || println!("samp1 = {}", samp1);
-    print_var();
-
-    samp1 = 10;
-    let mut change_var = || samp1 += 1;
-    change_var();
-
-    println!("samp1 = {}", samp1);
-
-    samp1 = 10;
-    println!("samp1 = {}", samp1);
+    let sum = |a: i32, b: i32| a + b;
+    let prod = |a: i32, b: i32| a * b;
+    println!("5 + 4 = {}", use_func(5, 4, sum));
+    println!("5 * 4 = {}", use_func(5, 4, prod));
 }

@@ -13,34 +13,32 @@ mod restaurant;
 use crate::restaurant::order_food;
 
 fn main() {
-    let path = "lines.txt";
-    let output = File::create(path);
-    let mut output = match output {
-        Ok(file) => file,
-        Err(error) => {
-            // Also works without the curly braces
-            panic!("Problem creating the file: {:?}", error)
-        }
-    };
+    let mut array = [1, 2, 3, 4];
 
-    write!(output, "Just some text\nHello world!").expect("Failed to write to file");
-
-    let input = File::open(path).unwrap();
-    let buffered = BufReader::new(input);
-
-    for line in buffered.lines() {
-        println!("{}", line.unwrap())
+    for val in array.iter() {
+        // This way the loop is "borrowing the values from the array. Can't manipulate it"
+        println!("{}", val)
     }
 
-    let output2 = File::create("rand.txt");
-    let output2 = match output2 {
-        Ok(file) => file,
-        Err(error) => match error.kind() {
-            ErrorKind::NotFound => match File::create("rand.txt") {
-                Ok(file_created) => file_created,
-                Err(e) => panic!("Can't create error: {:?}", e),
-            },
-            _other_error => panic!("Problem opening file: {:?}", error),
-        },
-    };
+    let mut iter1 = array.iter();
+
+    println!("1st: {:?}", iter1.next());
+
+    let can_vote = |age: i32| -> bool { age >= 18 };
+    // It's la Javascript's Arrow Functions or Java's Lambda Functions
+
+    println!("Can vote?: {}", can_vote(9));
+
+    let mut samp1 = 5;
+    let print_var = || println!("samp1 = {}", samp1);
+    print_var();
+
+    samp1 = 10;
+    let mut change_var = || samp1 += 1;
+    change_var();
+
+    println!("samp1 = {}", samp1);
+
+    samp1 = 10;
+    println!("samp1 = {}", samp1);
 }
